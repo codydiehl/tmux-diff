@@ -9,32 +9,32 @@ remove_empty_lines_from_end_of_file() {
 }
 
 get_tmux_option() {
-	local option=$1
-	local default_value=$2
-	local option_value=$(tmux show-option -gqv "$option")
-	if [ -z "$option_value" ]; then
-		echo "$default_value"
-	else
-		echo "$option_value"
-	fi
+  local option=$1
+  local default_value=$2
+  local option_value=$(tmux show-option -gqv "$option")
+  if [ -z "$option_value" ]; then
+    echo "$default_value"
+  else
+    echo "$option_value"
+  fi
 }
 
 display_message() {
-	local message="$1"
-	# display_duration defaults to 5 seconds, if not passed as an argument
-	if [ "$#" -eq 2 ]; then
-		local display_duration="$2"
-	else
-		local display_duration="5000"
-	fi
-	# saves user-set 'display-time' option
-	local saved_display_time=$(get_tmux_option "display-time" "750")
-	# sets message display time to 5 seconds
-	tmux set-option -gq display-time "$display_duration"
-	# displays message
-	tmux display-message "$message"
-	# restores original 'display-time' value
-	tmux set-option -gq display-time "$saved_display_time"
+  local message="$1"
+  # display_duration defaults to 5 seconds, if not passed as an argument
+  if [ "$#" -eq 2 ]; then
+    local display_duration="$2"
+  else
+    local display_duration="5000"
+  fi
+  # saves user-set 'display-time' option
+  local saved_display_time=$(get_tmux_option "display-time" "750")
+  # sets message display time to 5 seconds
+  tmux set-option -gq display-time "$display_duration"
+  # displays message
+  tmux display-message "$message"
+  # restores original 'display-time' value
+  tmux set-option -gq display-time "$saved_display_time"
 }
 
 wrong_num_panes_message() {
@@ -66,5 +66,5 @@ kill_pane() {
 }
 
 check_panes() {
-    $CURRENT_DIR/check_if_two_panes.sh
+  $CURRENT_DIR/check_if_two_panes.sh
 }
